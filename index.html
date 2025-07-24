@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beyza'ya Özür</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fce4ec;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      z-index: 1;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      z-index: 1;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #f44336;
+      color: white;
+    }
+
+   
+    }
+  </style>
+</head>
+<body>
+  <h1 id="message">
+    Şuan bana kızgın olduğunu biliyorum ve ne yaptığımı da bilmiyorum<br />
+    ama her ne yaptıysam özür dilerim 💔<br /><br />
+    Barışalım mı?
+  </h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Evet</button>
+    <button id="noBtn">Hayır</button>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const overlayYes = document.getElementById("overlayYes");
+    const message = document.getElementById("message");
+
+    const noTexts = [
+      "Evet mi demek istedin?",
+      "Evet mi seni yerim 💕",
+      "Gerçekten hayır mı?",
+      "Yeşil bir evet butonunu görmezden mi geleceksin",
+      "Evet diyeceğini biliyordum",
+    ];
+
+    let noClickCount = 0;
+
+    noBtn.addEventListener("click", () => {
+      noClickCount++;
+
+      if (noClickCount <= noTexts.length) {
+        yesBtn.style.transform = `scale(${1 + noClickCount * 0.2})`;
+        yesBtn.textContent = noTexts[noClickCount - 1];
+      }
+
+      if (noClickCount > noTexts.length) {
+        document.querySelector(".buttons").style.display = "none";
+        overlayYes.style.display = "flex";
+      }
+    });
+
+    yesBtn.addEventListener("click", () => {
+      message.innerHTML = "Evet diyeceğini biliyordum :D 💖 !";
+      document.querySelector(".buttons").style.display = "none";
+      overlayYes.style.display = "none";
+    });
+
+    overlayYes.addEventListener("click", () => {
+      message.innerHTML = "Evet diyeceğini biliyordum :D 💖 !";
+      overlayYes.style.display = "none";
+    });
+  </script>
+</body>
+</html>
